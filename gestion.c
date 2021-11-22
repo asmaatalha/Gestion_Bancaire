@@ -5,60 +5,79 @@
 
 
 //creation de compte ... 
+
+
+// void insert()
+// {
+//     struct gestion
+//     {
+//         char cin[20]; 
+//         char nom[20]; 
+//         char prenom[20];
+//         int montant;
+//     }users;
+    
+//     FILE * fichier;
+//     fichier = fopen("db.txt", "a");
+
+//     printf("CIN: ");
+//     scanf("%s", &users.cin);
+
+//     printf("Nom: ");
+//     scanf("%s", &users.nom);
+
+//     printf("Prenom: ");
+//     scanf("%s", &users.prenom);
+
+//     printf("Montant: ");
+//     scanf("%s", &users.montant);
+
+//     fwrite(&users, sizeof(users), 1, fichier);
+//     fclose(fichier);
+    
+// }
+
 int choixMulti, quitterReMenu;
+
+//déclaration de fichier
+FILE * fichier = NULL;
+
 void creationCompte()
 {
-
-    FILE * fichier = NULL;
-
-
     fichier = fopen("db.txt", "a");
-
-    if (fichier == NULL)
-    {
-        printf("ce fichier n'existe pas.\n");
-    }
-
-    else
-    {
-       fputs("asmaa talha", fichier); 
-    }
     
-    
-
-    char cin[20], nom[20], prenom[20];
-    int montant;
+    struct gestion
+    {
+        char cin[20]; 
+        char nom[20]; 
+        char prenom[20];
+        int montant;
+    }utilisateur;
     
     printf("CIN: ");
-    scanf("%s", &cin);
+    scanf("%s", &utilisateur.cin);
     
     printf("Nom: ");
-    scanf(" %s", &nom);
+    scanf(" %s", &utilisateur.nom);
     
     printf("Prenom: ");
-    scanf(" %s", &prenom);
+    scanf(" %s", &utilisateur.prenom);
     
     printf("Montant: ");
-    scanf("%d",&montant);
+    scanf("%d",&utilisateur.montant);
     
  	printf("vos informations :\n");
-    printf("Nom: %s\n", nom);
-    printf("Prenom: %s\n", prenom);
-    printf("CIN: %s\n", cin);
-    printf("Montant: %d\n", montant); 
 
-
- ////////////////////////////////
-    fputs("Nom: %s\n", fichier);
-    fputs("Prenom: %s\n", fichier);
-    fputs("CIN: %s\n", fichier);
-    fputs("Montant: %d\n", fichier);    
-    
+    fprintf(fichier, "Nom: %s\n", utilisateur.nom);
+    fprintf(fichier, "Prenom: %s\n", utilisateur.prenom);
+    fprintf(fichier, "CIN: %s\n", utilisateur.cin);
+    fprintf(fichier, "Montant: %d\n", utilisateur.montant); 
+        
 }
-void menuFonction()
+void Menu()
 {
     int menu;
-    // clean ecran 
+    
 	printf("1. Creation de compte\n");
 	printf("2. Creation de plusiers comptes\n");
 	printf("3. Operations\n");
@@ -82,7 +101,7 @@ void menuFonction()
 			scanf("%d", &quitterReMenu);
             if(quitterReMenu == 1)
             {
-                menuFonction();
+                Menu();
             }
             else 
             {
@@ -94,7 +113,7 @@ void menuFonction()
             creationCompte();
             printf("Le compte a ete cree avec succes !\n");
 			
-                ///After creating the first account, giving the user 3 choices : if he hopes to create an other account, back to the principal menu or just leave ..
+///After creating the first account, giving the user 3 choices : if he hopes to create an other account, back to the principal menu or just leave ..
 
             do{
                 printf("1. Voulez-vous creer un autre compte ?\n");
@@ -109,7 +128,7 @@ void menuFonction()
                 }
                 else if (choixMulti == 2)
                 {
-                    menuFonction();
+                    Menu();
                 }
                 else 
                 {
@@ -131,7 +150,7 @@ void menuFonction()
 			printf("QUITTER\n");
 			break;        
 		default:
-		    menuFonction();
+		    Menu();
 		    break;
 	}
 }
@@ -140,5 +159,5 @@ int main()
 {
     
 
-    menuFonction() ;
+    Menu() ;
 }
