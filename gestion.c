@@ -74,6 +74,15 @@ void creationCompte()
     fprintf(fichier, "Montant: %d\n", utilisateur.montant); 
         
 }
+
+// void operation()
+// {
+//     int Multi;
+
+
+// }
+
+
 void Menu()
 {
     int menu;
@@ -113,8 +122,6 @@ void Menu()
             creationCompte();
             printf("Le compte a ete cree avec succes !\n");
 			
-///After creating the first account, giving the user 3 choices : if he hopes to create an other account, back to the principal menu or just leave ..
-
             do{
                 printf("1. Voulez-vous creer un autre compte ?\n");
                 printf("2. Revenir au Menu Principal !\n");
@@ -139,6 +146,15 @@ void Menu()
 			break;
 		case 3:
 			printf("Operations\n");
+
+            do
+            {
+                printf("1. Retrait\n");
+                printf("2. Dépôt\n");
+
+                scanf("%d", )
+            } while ();
+            
 			break;
 		case 4:
 			printf("Affichage\n");
