@@ -24,8 +24,6 @@ void creationCompte()
 {
     fichier = fopen("db.txt", "a");
     
-    
-    
     printf("CIN: ");
     scanf("%s", &utilisateur.cin);
     
@@ -44,25 +42,9 @@ void creationCompte()
     fprintf(fichier, "Prenom: %s\n", utilisateur.prenom);
     fprintf(fichier, "CIN: %s\n", utilisateur.cin);
     fprintf(fichier, "Montant: %d\n", utilisateur.montant); 
-        
+    fprintf(fichier, "********************\n"); 
+    
 }
-
-// void operationRetrait()
-// {
-//     int Multi, mul;
-
-//     printf("Retrait d'argent:");
-
-//     scanf("%d", Multi);
-
-//     mul = utilisateur.montant - Multi;
-
-//     fprintf(fichier, "Montant: %d", mul);
-
-// }
-
-
-
 
 void Menu()
 {
@@ -78,7 +60,6 @@ void Menu()
 	printf("Veuillez entrer le num de votre operation\t");
 	scanf("%d", &menu);
 	
-
 	switch (menu)
 	{
 		case 1:
@@ -134,8 +115,9 @@ void Menu()
             {
                 printf("1. Retrait\n");
                 printf("2. Depot\n");
+                printf("3. QUITTER !\n");
 
-                scanf("%d", choixOperation);
+                scanf("%d", &choixOperation);
 
                 if (choixOperation == 1)
                 {
@@ -160,7 +142,11 @@ void Menu()
 
                     printf("Le depot a ete avec succes");
                 }
-                
+                else
+                {
+                    printf("A bientot!");
+                }
+                                
             } while (choixOperation == 1);
             
 			break;
@@ -186,6 +172,5 @@ void Menu()
 int main()
 {
     
-
     Menu() ;
 }
