@@ -1,16 +1,3 @@
-
-Nom: TALHA
-Prenom: ASMAA
-CIN: 56749
-Montant: 1000
-Nom: TALHA
-Prenom: ASMAA
-CIN: 4768392
-Montant: 200
-Nom: YASER
-Prenom: JHSDDQ
-CIN: 87687686
-Montant: 0
 Nom: ASMAA
 Prenom: TALHA
 CIN: 12345
@@ -21,3 +8,8 @@ Prenom: LAHMAR
 CIN: 1345678
 Montant: 1000
 *******************************************
+Nom: YOUSSEF
+Prenom: BOUHALLA
+CIN: 12345
+Montant: 1000
+********************

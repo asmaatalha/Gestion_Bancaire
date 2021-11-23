@@ -9,12 +9,8 @@
 int choixMulti, quitterReMenu, choixOperation, mul;
 struct gestion
 {
-    char cin[20]; 
-    char nom[20]; 
-    char prenom[20];
-    int montant;
-    int montant2;
-    int montant3
+    char cin[20], nom[20], prenom[20]; 
+    int montant, montant2, montant3;
 }utilisateur;
 
 //déclaration de fichier..
@@ -46,13 +42,46 @@ void creationCompte()
     
 }
 
+void retrait()
+{
+
+    printf("Entrez votre CIN: ");
+    scanf("%d", &utilisateur.cin);
+
+    printf("Entrez le montant: ");
+    scanf("%d", &utilisateur.montant2);
+
+    mul = utilisateur.montant - utilisateur.montant2;
+
+    printf("Montant reste: %d", mul);
+
+    // printf("Le retrait a ete avec succes\n");
+
+}
+
+void depot()
+{
+    printf("Entrez votre CIN: ");
+    scanf("%d", &utilisateur.cin);
+
+    printf("Entrez le montant: ");
+    scanf("%d", &utilisateur.montant3);
+
+    mul = utilisateur.montant - utilisateur.montant3;
+
+    printf("Montant: %d", mul);
+
+    // printf("Le depot a ete avec succes");
+
+}
+
 void Menu()
 {
     int menu;
     
 	printf("1. Creation de compte\n");
 	printf("2. Creation de plusiers comptes\n");
-	printf("3. Operations\n");
+	printf("3. Operations:\n");
 	printf("4. Affichage\n");
 	printf("5. Fedilisation\n");
 	printf("6. QUITTER\n");
@@ -109,45 +138,46 @@ void Menu()
 			break;
 
 		case 3:
-			printf("Operations\n");
-
+			printf("Operations:\n");
+            printf("1. Retrait\n");
+            printf("2. Depot\n");
+            printf("3. QUITTER !\n");
+            
             do
             {
-                printf("1. Retrait\n");
-                printf("2. Depot\n");
-                printf("3. QUITTER !\n");
-
                 scanf("%d", &choixOperation);
 
                 if (choixOperation == 1)
                 {
-                   printf("Entrez le montant: ");
-                   scanf("%d", &utilisateur.montant2);
+                    retrait();
 
-                   mul = utilisateur.montant - utilisateur.montant2;
+                    if (utilisateur.cin == 1)
+                    {
+                        printf("coco");
+                    }
+                    
+                    
+            
+                    printf("bien\n");
 
-                   fprintf(fichier, "Montant reste: %d", mul);
-
-                   printf("Le retrait a ete avec succes");
+                    printf("2. Depot\n");
+                    printf("3. QUITTER !\n");
 
                 }
                 else if (choixOperation == 2)
                 {
-                    printf("Entrez le montant: ");
-                    scanf("%d", &utilisateur.montant3);
+                    depot();
 
-                    mul = utilisateur.montant - utilisateur.montant3;
-
-                    fprintf(fichier, "Montant: %d", mul);
-
-                    printf("Le depot a ete avec succes");
+                    printf("1. Retrait\n");
+                    printf("3. QUITTER !\n");
                 }
                 else
                 {
-                    printf("A bientot!");
+                    printf("A bientot!\n");
+                    break;
                 }
                                 
-            } while (choixOperation == 1);
+            } while (choixOperation);
             
 			break;
 
