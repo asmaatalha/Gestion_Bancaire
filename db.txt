@@ -1,15 +1,3 @@
-Nom: ASMAA
-Prenom: TALHA
-CIN: 12345
-Montant: 100
-*******************************************
-Nom: KHADIJA
-Prenom: LAHMAR
-CIN: 1345678
-Montant: 1000
-*******************************************
-Nom: YOUSSEF
-Prenom: BOUHALLA
-CIN: 12345
-Montant: 1000
-********************
+ali aiii zg122 87
+saddas saddsa dsasd 98
+talha asmaa 123AS 100

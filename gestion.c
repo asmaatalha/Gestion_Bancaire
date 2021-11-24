@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <strings.h>
 
 
 
@@ -38,12 +39,9 @@ void creationCompte()
     
  	printf("vos informations :\n");
 
-    fprintf(fichier, "Nom: %s\n", utilisateur.nom);
-    fprintf(fichier, "Prenom: %s\n", utilisateur.prenom);
-    fprintf(fichier, "CIN: %s\n", utilisateur.cin);
-    fprintf(fichier, "Montant: %d\n", utilisateur.montant); 
-    fprintf(fichier, "********************\n"); 
-    
+    fprintf(fichier, "%s %s %s %d\n", utilisateur.nom, utilisateur.prenom,utilisateur.cin,utilisateur.montant);
+
+    fclose(fichier);
 }
 
 void retrait()
@@ -81,26 +79,29 @@ void depot()
 void recherche()
 {
     char cinR[20];
+    char holder[100];
+    char cin[20],nom[20],pre[20];
+    float mon;
     
     fichier = fopen("db.txt", "r");
 
     printf("Entrez CIN a rechercher:");
     scanf("%s", &cinR);
 
-    fscanf(fichier, "%s %s %s %d", &utilisateur.cin, &utilisateur.nom, &utilisateur.prenom, &utilisateur.montant);
-    if (cinR == utilisateur.cin)
-    {
-        printf("vos informations:\n");
-        printf("CIN: %s\n", utilisateur.cin);
-        printf("Nom: %s\n", utilisateur.nom);
-        printf("Prenom: %s\n", utilisateur.prenom);
-        printf("Montant: %d\n", utilisateur.montant); 
+    while (fgets(holder, 100, fichier)) {
+        sscanf(holder, "%s %s %s %f" ,nom, pre, cin, &mon );
+        if (strcmp(cinR,cin) == 0){
+            printf("vos informations:\n");
+            printf("CIN: %s\n", cin);
+            printf("Nom: %s\n", nom);
+            printf("Prenom: %s\n", pre);
+            printf("Montant: %f\n", mon); 
+        }
+        else
+        {
+            printf("Not found");
+        }
     }
-    else
-    {
-        printf("Not found!");
-    }
-
 }
 
 void Menu()
@@ -203,33 +204,6 @@ void Menu()
             
 			break;
 
-		// case 4:
-
-		// 	printf("Affichage\n");
-        //     printf("Entrez CIN a rechercher:");
-        //     scanf("%s", &utilisateur.cinR);
-            
-        //     fichier = fopen("db.txt", "r");
-        //     do
-        //     {
-        //         fscanf(fichier, "%s %s %s %d", &utilisateur.cin, &utilisateur.nom, &utilisateur.prenom, &utilisateur.montant);
-        //         if (utilisateur.cinR == utilisateur.cin)
-        //         {
-        //             printf("vos informations:\n");
-        //             printf("CIN: %s\n", utilisateur.cin);
-        //             printf("Nom: %s\n", utilisateur.nom);
-        //             printf("Prenom: %s\n", utilisateur.prenom);
-        //             printf("Montant: %d\n", utilisateur.montant); 
-        //         }
-        //         else
-        //         {
-        //             printf("Not found!");
-        //         }
-                
-        //     } while (utilisateur.cinR == utilisateur.cin);
-
-		// 	break;
-
         case 4:
             printf("Affichage:\n");
             do
@@ -255,7 +229,7 @@ void Menu()
 			break;
 
 		case 6:
-			printf("QUITTER\n");
+            printf("Quitter\n");
 			break;
 
 		default:
