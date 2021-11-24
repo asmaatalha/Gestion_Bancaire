@@ -6,15 +6,19 @@
 
 //creation de compte ... 
 
-int choixMulti, quitterReMenu, choixOperation, mul;
-struct gestion
+int choixMulti, quitterReMenu, choixOperation, choixAffichage;
+struct
 {
     char cin[20], nom[20], prenom[20]; 
-    int montant, montant2, montant3;
+    int montant, montantRetrait, montantDepot;
 }utilisateur;
 
 //déclaration de fichier..
 FILE * fichier = NULL;
+
+FILE * fichierRetrait = NULL;
+
+FILE * fichierDepot = NULL;
 
 void creationCompte()
 {
@@ -44,34 +48,58 @@ void creationCompte()
 
 void retrait()
 {
+    fichierRetrait = fopen("retrait.txt", "a");
 
     printf("Entrez votre CIN: ");
-    scanf("%d", &utilisateur.cin);
+    scanf("%s", &utilisateur.cin);
 
     printf("Entrez le montant: ");
-    scanf("%d", &utilisateur.montant2);
+    scanf("%d", &utilisateur.montantRetrait);
 
-    mul = utilisateur.montant - utilisateur.montant2;
-
-    printf("Montant reste: %d", mul);
-
-    // printf("Le retrait a ete avec succes\n");
+    fprintf(fichierRetrait, "CIN: %s\n", utilisateur.cin);
+    fprintf(fichierRetrait, "Montant Retrait: %d\n", utilisateur.montantRetrait);
+    fprintf(fichierRetrait, "********************\n"); 
 
 }
 
 void depot()
 {
+    fichierDepot = fopen("depot.txt", "a");
+
     printf("Entrez votre CIN: ");
-    scanf("%d", &utilisateur.cin);
+    scanf("%s", &utilisateur.cin);
 
     printf("Entrez le montant: ");
-    scanf("%d", &utilisateur.montant3);
+    scanf("%d", &utilisateur.montantDepot);
 
-    mul = utilisateur.montant - utilisateur.montant3;
+    fprintf(fichierDepot, "CIN: %s\n", utilisateur.cin);
+    fprintf(fichierDepot, "Montant Depot: %d\n", utilisateur.montantDepot);
+    fprintf(fichierDepot, "********************\n"); 
 
-    printf("Montant: %d", mul);
+}
 
-    // printf("Le depot a ete avec succes");
+void recherche()
+{
+    char cinR[20];
+    
+    fichier = fopen("db.txt", "r");
+
+    printf("Entrez CIN a rechercher:");
+    scanf("%s", &cinR);
+
+    fscanf(fichier, "%s %s %s %d", &utilisateur.cin, &utilisateur.nom, &utilisateur.prenom, &utilisateur.montant);
+    if (cinR == utilisateur.cin)
+    {
+        printf("vos informations:\n");
+        printf("CIN: %s\n", utilisateur.cin);
+        printf("Nom: %s\n", utilisateur.nom);
+        printf("Prenom: %s\n", utilisateur.prenom);
+        printf("Montant: %d\n", utilisateur.montant); 
+    }
+    else
+    {
+        printf("Not found!");
+    }
 
 }
 
@@ -139,51 +167,88 @@ void Menu()
 
 		case 3:
 			printf("Operations:\n");
-            printf("1. Retrait\n");
-            printf("2. Depot\n");
-            printf("3. QUITTER !\n");
-            
+
             do
             {
+                printf("1. Retrait\n");
+                printf("2. Depot\n");
+                printf("3. QUITTER !\n");
+
                 scanf("%d", &choixOperation);
 
                 if (choixOperation == 1)
                 {
                     retrait();
-
-                    if (utilisateur.cin == 1)
-                    {
-                        printf("coco");
-                    }
-                    
-                    
-            
-                    printf("bien\n");
+		            printf("Retire avec succes.");
 
                     printf("2. Depot\n");
                     printf("3. QUITTER !\n");
 
                 }
-                else if (choixOperation == 2)
+                else if (choixOperation == 2)  
                 {
                     depot();
+		            printf("Depot avec succes.");
 
-                    printf("1. Retrait\n");
+                    printf("2. Retrait\n");
                     printf("3. QUITTER !\n");
                 }
                 else
                 {
-                    printf("A bientot!\n");
+                    printf("A bientot!");
                     break;
                 }
                                 
-            } while (choixOperation);
+            } while (choixOperation == 1);
             
 			break;
 
-		case 4:
-			printf("Affichage\n");
-			break;
+		// case 4:
+
+		// 	printf("Affichage\n");
+        //     printf("Entrez CIN a rechercher:");
+        //     scanf("%s", &utilisateur.cinR);
+            
+        //     fichier = fopen("db.txt", "r");
+        //     do
+        //     {
+        //         fscanf(fichier, "%s %s %s %d", &utilisateur.cin, &utilisateur.nom, &utilisateur.prenom, &utilisateur.montant);
+        //         if (utilisateur.cinR == utilisateur.cin)
+        //         {
+        //             printf("vos informations:\n");
+        //             printf("CIN: %s\n", utilisateur.cin);
+        //             printf("Nom: %s\n", utilisateur.nom);
+        //             printf("Prenom: %s\n", utilisateur.prenom);
+        //             printf("Montant: %d\n", utilisateur.montant); 
+        //         }
+        //         else
+        //         {
+        //             printf("Not found!");
+        //         }
+                
+        //     } while (utilisateur.cinR == utilisateur.cin);
+
+		// 	break;
+
+        case 4:
+            printf("Affichage:\n");
+            do
+            {
+                printf("1. Par Ordre Ascendant\n");
+                printf("1. Par Ordre Descendant\n");
+                printf("3. Recherche par CIN\n");
+
+                scanf("%d", &choixAffichage);
+
+                if (choixAffichage == 3)
+                {
+                    recherche();
+                }
+                
+                
+            } while (choixAffichage == 1);
+            
+            break;
 
 		case 5:
 			printf("Fedilisation\n");
