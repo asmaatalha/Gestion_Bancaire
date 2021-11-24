@@ -8,6 +8,7 @@
 //creation de compte ... 
 
 int choixMulti, quitterReMenu, choixOperation, choixAffichage;
+
 struct
 {
     char cin[20], nom[20], prenom[20]; 
@@ -25,19 +26,19 @@ void creationCompte()
 {
     fichier = fopen("db.txt", "a");
     
-    printf("CIN: ");
-    scanf("%s", &utilisateur.cin);
-    
     printf("Nom: ");
     scanf(" %s", &utilisateur.nom);
     
     printf("Prenom: ");
     scanf(" %s", &utilisateur.prenom);
+
+    printf("CIN: ");
+    scanf("%s", &utilisateur.cin);
     
     printf("Montant: ");
     scanf("%d",&utilisateur.montant);
     
- 	printf("vos informations :\n");
+ 	fprintf(fichier, "vos informations :\n");
 
     fprintf(fichier, "%s %s %s %d\n", utilisateur.nom, utilisateur.prenom,utilisateur.cin,utilisateur.montant);
 
@@ -57,7 +58,6 @@ void retrait()
     fprintf(fichierRetrait, "CIN: %s\n", utilisateur.cin);
     fprintf(fichierRetrait, "Montant Retrait: %d\n", utilisateur.montantRetrait);
     fprintf(fichierRetrait, "********************\n"); 
-
 }
 
 void depot()
@@ -73,7 +73,6 @@ void depot()
     fprintf(fichierDepot, "CIN: %s\n", utilisateur.cin);
     fprintf(fichierDepot, "Montant Depot: %d\n", utilisateur.montantDepot);
     fprintf(fichierDepot, "********************\n"); 
-
 }
 
 void recherche()
@@ -97,11 +96,22 @@ void recherche()
             printf("Prenom: %s\n", pre);
             printf("Montant: %f\n", mon); 
         }
+
         else
         {
             printf("Not found");
         }
     }
+}
+
+void ascendant()
+{
+    
+}
+
+void descendant()
+{
+
 }
 
 void Menu()
@@ -128,14 +138,17 @@ void Menu()
     		printf("1. Voulez-vous revenir au menu principal ?\n");
     		printf("2. QUITTER !\n");
 			scanf("%d", &quitterReMenu);
+
             if(quitterReMenu == 1)
             {
                 Menu();
             }
+
             else 
             {
                 printf("A bientot!");
             }
+
 			break;
 
 		case 2:			
@@ -154,10 +167,12 @@ void Menu()
                     creationCompte();
                     printf("Le compte a ete cree avec succes !\n");
                 }
+                
                 else if (choixMulti == 2)
                 {
                     Menu();
                 }
+
                 else 
                 {
                     printf("A bientot!");
@@ -169,8 +184,7 @@ void Menu()
 		case 3:
 			printf("Operations:\n");
 
-            do
-            {
+            do{
                 printf("1. Retrait\n");
                 printf("2. Depot\n");
                 printf("3. QUITTER !\n");
@@ -186,6 +200,7 @@ void Menu()
                     printf("3. QUITTER !\n");
 
                 }
+
                 else if (choixOperation == 2)  
                 {
                     depot();
@@ -195,6 +210,7 @@ void Menu()
                     printf("3. QUITTER !\n");
                 }
                 else
+
                 {
                     printf("A bientot!");
                     break;
@@ -206,19 +222,34 @@ void Menu()
 
         case 4:
             printf("Affichage:\n");
-            do
-            {
+            
+            do{
                 printf("1. Par Ordre Ascendant\n");
                 printf("1. Par Ordre Descendant\n");
                 printf("3. Recherche par CIN\n");
+                printf("4. QUITTER !\n");
 
                 scanf("%d", &choixAffichage);
 
-                if (choixAffichage == 3)
+                if (choixAffichage == 1)
+                {
+                    ascendant();
+                }
+
+                else if (choixAffichage == 2)
+                {
+                    descendant();
+                }
+                
+                else if (choixAffichage == 3)
                 {
                     recherche();
                 }
-                
+
+                else
+                {
+                    printf("A bientot!");
+                }
                 
             } while (choixAffichage == 1);
             
@@ -240,6 +271,5 @@ void Menu()
 
 int main()
 {
-    
     Menu() ;
 }
