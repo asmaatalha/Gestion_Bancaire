@@ -45,35 +45,35 @@ void creationCompte()
     fclose(fichier);
 }
 
-void retrait()
-{
-    fichierRetrait = fopen("retrait.txt", "a");
+// void retrait()
+// {
+//     fichierRetrait = fopen("retrait.txt", "a");
 
-    printf("Entrez votre CIN: ");
-    scanf("%s", &utilisateur.cin);
+//     printf("Entrez votre CIN: ");
+//     scanf("%s", &utilisateur.cin);
 
-    printf("Entrez le montant: ");
-    scanf("%d", &utilisateur.montantRetrait);
+//     printf("Entrez le montant: ");
+//     scanf("%d", &utilisateur.montantRetrait);
 
-    fprintf(fichierRetrait, "CIN: %s\n", utilisateur.cin);
-    fprintf(fichierRetrait, "Montant Retrait: %d\n", utilisateur.montantRetrait);
-    fprintf(fichierRetrait, "********************\n"); 
-}
+//     fprintf(fichierRetrait, "CIN: %s\n", utilisateur.cin);
+//     fprintf(fichierRetrait, "Montant Retrait: %d\n", utilisateur.montantRetrait);
+//     fprintf(fichierRetrait, "********************\n"); 
+// }
 
-void depot()
-{
-    fichierDepot = fopen("depot.txt", "a");
+// void depot()
+// {
+//     fichierDepot = fopen("depot.txt", "a");
 
-    printf("Entrez votre CIN: ");
-    scanf("%s", &utilisateur.cin);
+//     printf("Entrez votre CIN: ");
+//     scanf("%s", &utilisateur.cin);
 
-    printf("Entrez le montant: ");
-    scanf("%d", &utilisateur.montantDepot);
+//     printf("Entrez le montant: ");
+//     scanf("%d", &utilisateur.montantDepot);
 
-    fprintf(fichierDepot, "CIN: %s\n", utilisateur.cin);
-    fprintf(fichierDepot, "Montant Depot: %d\n", utilisateur.montantDepot);
-    fprintf(fichierDepot, "********************\n"); 
-}
+//     fprintf(fichierDepot, "CIN: %s\n", utilisateur.cin);
+//     fprintf(fichierDepot, "Montant Depot: %d\n", utilisateur.montantDepot);
+//     fprintf(fichierDepot, "********************\n"); 
+// }
 
 void recherche()
 {
@@ -100,6 +100,60 @@ void recherche()
         else
         {
             printf("Not found");
+        }
+    }
+}
+
+void retrait()
+{
+    char cinR[20];
+    char holder[100];
+    char cin[20],nom[20],pre[20];
+    float mon;
+    float mont;
+    
+    fichier = fopen("db.txt", "r");
+
+    printf("Entrez CIN:");
+    scanf("%s", &cinR);
+
+    while (fgets(holder, 100, fichier)) {
+        sscanf(holder, "%s %s %s %f" ,nom, pre, cin, &mon );
+        if (strcmp(cinR,cin) == 0){
+            
+            printf("Montant: %f\n", mon); 
+            printf("entrez solde:");
+            scanf("%f",&mont);
+
+            printf("le retrait est:%f Dh\n.",mon - mont );
+
+        }
+    }
+}
+
+void depot()
+{
+    char cinR[20];
+    char holder[100];
+    char cin[20],nom[20],pre[20];
+    float mon;
+    float mont;
+    
+    fichier = fopen("db.txt", "r");
+
+    printf("Entrez CIN:");
+    scanf("%s", &cinR);
+
+    while (fgets(holder, 100, fichier)) {
+        sscanf(holder, "%s %s %s %f" ,nom, pre, cin, &mon );
+        if (strcmp(cinR,cin) == 0){
+            
+            printf("Montant: %f\n", mon); 
+            printf("entrez solde:");
+            scanf("%f",&mont);
+
+            printf(" le depot est:%f Dh\n.",mon + mont );
+
         }
     }
 }
