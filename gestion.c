@@ -38,42 +38,10 @@ void creationCompte()
     printf("Montant: ");
     scanf("%d",&utilisateur.montant);
     
- 	fprintf(fichier, "vos informations :\n");
-
     fprintf(fichier, "%s %s %s %d\n", utilisateur.nom, utilisateur.prenom,utilisateur.cin,utilisateur.montant);
 
     fclose(fichier);
 }
-
-// void retrait()
-// {
-//     fichierRetrait = fopen("retrait.txt", "a");
-
-//     printf("Entrez votre CIN: ");
-//     scanf("%s", &utilisateur.cin);
-
-//     printf("Entrez le montant: ");
-//     scanf("%d", &utilisateur.montantRetrait);
-
-//     fprintf(fichierRetrait, "CIN: %s\n", utilisateur.cin);
-//     fprintf(fichierRetrait, "Montant Retrait: %d\n", utilisateur.montantRetrait);
-//     fprintf(fichierRetrait, "********************\n"); 
-// }
-
-// void depot()
-// {
-//     fichierDepot = fopen("depot.txt", "a");
-
-//     printf("Entrez votre CIN: ");
-//     scanf("%s", &utilisateur.cin);
-
-//     printf("Entrez le montant: ");
-//     scanf("%d", &utilisateur.montantDepot);
-
-//     fprintf(fichierDepot, "CIN: %s\n", utilisateur.cin);
-//     fprintf(fichierDepot, "Montant Depot: %d\n", utilisateur.montantDepot);
-//     fprintf(fichierDepot, "********************\n"); 
-// }
 
 void recherche()
 {
@@ -95,6 +63,8 @@ void recherche()
             printf("Nom: %s\n", nom);
             printf("Prenom: %s\n", pre);
             printf("Montant: %f\n", mon); 
+
+            break;
         }
 
         else
@@ -267,7 +237,7 @@ void Menu()
 
                 {
                     printf("A bientot!");
-                    break;
+                    
                 }
                                 
             } while (choixOperation == 1);
@@ -278,26 +248,26 @@ void Menu()
             printf("Affichage:\n");
             
             do{
-                printf("1. Par Ordre Ascendant\n");
-                printf("1. Par Ordre Descendant\n");
-                printf("3. Recherche par CIN\n");
-                printf("4. QUITTER !\n");
+                printf("1. Recherche par CIN\n");
+                printf("2. QUITTER !\n");
 
                 scanf("%d", &choixAffichage);
-
+                
                 if (choixAffichage == 1)
                 {
-                    ascendant();
-                }
-
-                else if (choixAffichage == 2)
-                {
-                    descendant();
-                }
-                
-                else if (choixAffichage == 3)
-                {
                     recherche();
+
+                    printf("1. Voulez-vous revenir au menu principal ?\n");
+                    printf("2. QUITTER !\n");
+
+                    if(quitterReMenu == 1)
+                    {
+                        Menu();
+                    }
+                    else
+                    {
+                        printf("A bientot!");
+                    }
                 }
 
                 else
